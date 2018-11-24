@@ -1,0 +1,18 @@
+﻿
+<br />
+
+<form method="post" action="~/Home/Result">
+    @{
+        foreach (Element element in ViewBag.Elements)
+        {
+            Write(element.Name + " " + element.Text);
+            <input type="range" min="0" max="1" step="0.1" name="elements"/>
+            <br />
+            <br />
+
+        }
+    }
+    
+    <button>Далее</button>
+</form>
+

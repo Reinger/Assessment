@@ -1,0 +1,29 @@
+﻿<br />
+
+@{
+    ModelContainer model = new ModelContainer();
+
+    double[] f = ViewBag.F;
+    var factors = model.FactorSet.Select(x => x).ToList();
+
+    double[] c = ViewBag.C;
+    var criterions = model.CriterionSet.Select(x => x).ToList();
+
+    for (int i = 0; i < 6; i++)
+    {
+        Write(factors[i].Name + ": " + f[i]);
+
+        <ol>
+            @{
+                for (int j = 0; j < 17; j++)
+                {
+
+                    if (c[j] != -1 && criterions[j].Factor == factors[i])
+                    {
+                        <li>@{ Write(" " + criterions[j].Name + ": " + c[j]); }</li>
+                    }
+                }
+            }
+        </ol>
+    }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc277ca312494b09b2273bf5129c3d19" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model.Metrics" Width="1.5" PointX="4.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Factor" Width="1.5" PointX="9.375" PointY="2" />
+        <EntityTypeShape EntityType="Model.Criterion" Width="1.5" PointX="7.125" PointY="2" />
+        <EntityTypeShape EntityType="Model.Element" Width="1.5" PointX="4.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Phase" Width="1.5" PointX="0.5" PointY="2" />
+        <AssociationConnector Association="Model.CriterionMetrics" />
+        <AssociationConnector Association="Model.MetricsElement" />
+        <EntityTypeShape EntityType="Model.Class" Width="1.5" PointX="9.375" PointY="4.625" />
+        <AssociationConnector Association="Model.FactorCriterion" />
+        <EntityTypeShape EntityType="Model.ClassCriterion" Width="1.5" PointX="7.125" PointY="4.625" />
+        <EntityTypeShape EntityType="Model.PhaseMetrics" Width="1.5" PointX="2.625" PointY="2" />
+        <AssociationConnector Association="Model.PhasePhaseMetrics" />
+        <AssociationConnector Association="Model.MetricsPhaseMetrics" />
+        <AssociationConnector Association="Model.CriterionClassCriterion" />
+        <AssociationConnector Association="Model.ClassClassCriterion" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

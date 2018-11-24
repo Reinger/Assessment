@@ -1,0 +1,30 @@
+﻿<form method="post" action="~/Home/Elements">
+    
+    <br/>
+
+    <select name="classId">
+        @foreach (Class _class in ViewBag.Classes)
+        {
+            <option value="@_class.Id">
+                @{Write(_class.Name);}
+            </option>
+        }
+    </select>
+
+    <br/>
+    <br/>
+
+    <select name="phaseId">
+        @foreach (Phase phase in ViewBag.Phases)
+        {
+            <option value="@phase.Id">
+                @{Write(phase.Name);}
+            </option>
+        }
+    </select>
+    
+    <br/>
+    <br/>
+    
+    <button>Далее</button>
+</form>

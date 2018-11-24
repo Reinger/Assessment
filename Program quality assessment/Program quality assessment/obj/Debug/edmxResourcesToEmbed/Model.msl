@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="MetricsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Metrics)">
+        <MappingFragment StoreEntitySet="MetricsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CriterionId" ColumnName="CriterionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FactorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Factor)">
+        <MappingFragment StoreEntitySet="FactorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CriterionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Criterion)">
+        <MappingFragment StoreEntitySet="CriterionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="FactorId" ColumnName="FactorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ElementSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Element)">
+        <MappingFragment StoreEntitySet="ElementSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Expert" ColumnName="Expert" />
+          <ScalarProperty Name="MetricsId" ColumnName="MetricsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhaseSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Phase)">
+        <MappingFragment StoreEntitySet="PhaseSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Class)">
+        <MappingFragment StoreEntitySet="ClassSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassCriterionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ClassCriterion)">
+        <MappingFragment StoreEntitySet="ClassCriterionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CriterionId" ColumnName="CriterionId" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhaseMetricsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PhaseMetrics)">
+        <MappingFragment StoreEntitySet="PhaseMetricsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PhaseId" ColumnName="PhaseId" />
+          <ScalarProperty Name="MetricsId" ColumnName="MetricsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

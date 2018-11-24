@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MetricsSet" EntityType="Model.Metrics" />
+    <EntitySet Name="FactorSet" EntityType="Model.Factor" />
+    <EntitySet Name="CriterionSet" EntityType="Model.Criterion" />
+    <EntitySet Name="ElementSet" EntityType="Model.Element" />
+    <EntitySet Name="PhaseSet" EntityType="Model.Phase" />
+    <AssociationSet Name="CriterionMetrics" Association="Model.CriterionMetrics">
+      <End Role="Criterion" EntitySet="CriterionSet" />
+      <End Role="Metrics" EntitySet="MetricsSet" />
+    </AssociationSet>
+    <AssociationSet Name="MetricsElement" Association="Model.MetricsElement">
+      <End Role="Metrics" EntitySet="MetricsSet" />
+      <End Role="Element" EntitySet="ElementSet" />
+    </AssociationSet>
+    <EntitySet Name="ClassSet" EntityType="Model.Class" />
+    <AssociationSet Name="FactorCriterion" Association="Model.FactorCriterion">
+      <End Role="Factor" EntitySet="FactorSet" />
+      <End Role="Criterion" EntitySet="CriterionSet" />
+    </AssociationSet>
+    <EntitySet Name="ClassCriterionSet" EntityType="Model.ClassCriterion" />
+    <EntitySet Name="PhaseMetricsSet" EntityType="Model.PhaseMetrics" />
+    <AssociationSet Name="PhasePhaseMetrics" Association="Model.PhasePhaseMetrics">
+      <End Role="Phase" EntitySet="PhaseSet" />
+      <End Role="PhaseMetrics" EntitySet="PhaseMetricsSet" />
+    </AssociationSet>
+    <AssociationSet Name="MetricsPhaseMetrics" Association="Model.MetricsPhaseMetrics">
+      <End Role="Metrics" EntitySet="MetricsSet" />
+      <End Role="PhaseMetrics" EntitySet="PhaseMetricsSet" />
+    </AssociationSet>
+    <AssociationSet Name="CriterionClassCriterion" Association="Model.CriterionClassCriterion">
+      <End Role="Criterion" EntitySet="CriterionSet" />
+      <End Role="ClassCriterion" EntitySet="ClassCriterionSet" />
+    </AssociationSet>
+    <AssociationSet Name="ClassClassCriterion" Association="Model.ClassClassCriterion">
+      <End Role="Class" EntitySet="ClassSet" />
+      <End Role="ClassCriterion" EntitySet="ClassCriterionSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Metrics">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Criterion" Relationship="Model.CriterionMetrics" FromRole="Metrics" ToRole="Criterion" />
+    <Property Name="CriterionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Element" Relationship="Model.MetricsElement" FromRole="Metrics" ToRole="Element" />
+    <NavigationProperty Name="PhaseMetrics" Relationship="Model.MetricsPhaseMetrics" FromRole="Metrics" ToRole="PhaseMetrics" />
+  </EntityType>
+  <EntityType Name="Factor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Criterion" Relationship="Model.FactorCriterion" FromRole="Factor" ToRole="Criterion" />
+  </EntityType>
+  <EntityType Name="Criterion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Metrics" Relationship="Model.CriterionMetrics" FromRole="Criterion" ToRole="Metrics" />
+    <NavigationProperty Name="Factor" Relationship="Model.FactorCriterion" FromRole="Criterion" ToRole="Factor" />
+    <Property Name="FactorId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ClassCriterion" Relationship="Model.CriterionClassCriterion" FromRole="Criterion" ToRole="ClassCriterion" />
+  </EntityType>
+  <EntityType Name="Element">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Text" Type="String" Nullable="false" />
+    <Property Name="Expert" Type="Boolean" Nullable="false" DefaultValue="True" />
+    <NavigationProperty Name="Metrics" Relationship="Model.MetricsElement" FromRole="Element" ToRole="Metrics" />
+    <Property Name="MetricsId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Phase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="PhaseMetrics" Relationship="Model.PhasePhaseMetrics" FromRole="Phase" ToRole="PhaseMetrics" />
+  </EntityType>
+  <Association Name="CriterionMetrics">
+    <End Type="Model.Criterion" Role="Criterion" Multiplicity="1" />
+    <End Type="Model.Metrics" Role="Metrics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Criterion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Metrics">
+        <PropertyRef Name="CriterionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetricsElement">
+    <End Type="Model.Metrics" Role="Metrics" Multiplicity="1" />
+    <End Type="Model.Element" Role="Element" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Metrics">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Element">
+        <PropertyRef Name="MetricsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="ClassCriterion" Relationship="Model.ClassClassCriterion" FromRole="Class" ToRole="ClassCriterion" />
+  </EntityType>
+  <Association Name="FactorCriterion">
+    <End Type="Model.Factor" Role="Factor" Multiplicity="1" />
+    <End Type="Model.Criterion" Role="Criterion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Criterion">
+        <PropertyRef Name="FactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ClassCriterion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <NavigationProperty Name="Criterion" Relationship="Model.CriterionClassCriterion" FromRole="ClassCriterion" ToRole="Criterion" />
+    <Property Name="CriterionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Class" Relationship="Model.ClassClassCriterion" FromRole="ClassCriterion" ToRole="Class" />
+    <Property Name="ClassId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhaseMetrics">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <NavigationProperty Name="Phase" Relationship="Model.PhasePhaseMetrics" FromRole="PhaseMetrics" ToRole="Phase" />
+    <Property Name="PhaseId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Metrics" Relationship="Model.MetricsPhaseMetrics" FromRole="PhaseMetrics" ToRole="Metrics" />
+    <Property Name="MetricsId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="PhasePhaseMetrics">
+    <End Type="Model.Phase" Role="Phase" Multiplicity="1" />
+    <End Type="Model.PhaseMetrics" Role="PhaseMetrics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhaseMetrics">
+        <PropertyRef Name="PhaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetricsPhaseMetrics">
+    <End Type="Model.Metrics" Role="Metrics" Multiplicity="1" />
+    <End Type="Model.PhaseMetrics" Role="PhaseMetrics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Metrics">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhaseMetrics">
+        <PropertyRef Name="MetricsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CriterionClassCriterion">
+    <End Type="Model.Criterion" Role="Criterion" Multiplicity="1" />
+    <End Type="Model.ClassCriterion" Role="ClassCriterion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Criterion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassCriterion">
+        <PropertyRef Name="CriterionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassClassCriterion">
+    <End Type="Model.Class" Role="Class" Multiplicity="1" />
+    <End Type="Model.ClassCriterion" Role="ClassCriterion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassCriterion">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
